@@ -1,0 +1,78 @@
+/* Custom styling for the navbar */
+.navbar-custom {
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar brand styling */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Styling for search input */
+.search-input {
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+}
+
+/* Styling for the search button */
+.search-btn {
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+}
+
+/* Styling for the navbar buttons */
+.nav-btn {
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+/* Hover effects for the navbar buttons */
+.nav-btn:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Modal header background */
+.modal-header {
+  background-color: #f8f9fa;
+}
+
+/* Modal title styling */
+.modal-title {
+  color: #343a40;
+}
+
+/* Close button styling */
+.btn-close {
+  filter: brightness(0.7);
+}
+
+/* Close button hover effect */
+.btn-close:hover {
+  filter: brightness(1);
+}
+
+/* Ensuring proper spacing for navbar items */
+.navbar-nav .nav-item {
+  margin-right: 20px;
+}
+
+/* Responsive behavior for small screen sizes */
+@media (max-width: 767px) {
+  .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-nav .nav-item {
+    margin-bottom: 10px;
+  }
+
+  .search-input,
+  .search-btn {
+    font-size: 1rem;
+  }
+}
