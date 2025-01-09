@@ -1,38 +1,31 @@
-import React, { useState } from 'react';
-import { MusicContext } from '../Context';
-import PinnedMusic from './PinnedMusic';
-import LikedMusic from './LikedMusic';
-import './Navbar.css';
+import React, { useState, useContext } from "react";
+import { MusicContext } from "../Context";
+import PinnedMusic from "./PinnedMusic";
+import LikedMusic from "./LikedMusic";
+import "./Navbar.css";
 
-const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData, userEmail, handleLogout }) => {
-  const { setResultOffset } = React.useContext(MusicContext);
+const Navbar = ({
+  keyword,
+  handleKeyPress,
+  setKeyword,
+  fetchMusicData,
+  userEmail,
+  handleLogout,
+}) => {
+  const { setResultOffset } = useContext(MusicContext);
 
-  // State to control the visibility of the modals and user dropdown
+  // State for modals and dropdown
   const [showPinnedModal, setShowPinnedModal] = useState(false);
   const [showLikedModal, setShowLikedModal] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);  // Track if email is clicked
-
-  const togglePinnedModal = () => {
-    setShowPinnedModal(!showPinnedModal);
-  };
-
-  const toggleLikedModal = () => {
-    setShowLikedModal(!showLikedModal);
-  };
-
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
+  const [showDropdown, setShowDropdown] = useState(false);
 
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-custom sticky-top">
         <div className="container-fluid">
-          {/* Music App Text (non-clickable) */}
           <span className="navbar-brand text-light">
             <i className="bi bi-music-note-list mx-2"></i>Music App
           </span>
-
           <button
             className="navbar-toggler"
             type="button"
@@ -69,7 +62,7 @@ const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData, userEmail
               <li className="nav-item">
                 <button
                   type="button"
-                  onClick={togglePinnedModal}
+                  onClick={() => setShowPinnedModal(true)}
                   className="btn btn-outline-light btn-sm mx-1 nav-btn"
                 >
                   <i className="bi bi-pin-angle-fill"></i> Pinned Playlist
@@ -78,36 +71,30 @@ const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData, userEmail
               <li className="nav-item">
                 <button
                   type="button"
-                  onClick={toggleLikedModal}
+                  onClick={() => setShowLikedModal(true)}
                   className="btn btn-outline-light btn-sm mx-1 nav-btn"
                 >
                   <i className="bi bi-heart-fill"></i> Liked Playlist
                 </button>
               </li>
-
-              {/* Email Dropdown */}
               <li className="nav-item dropdown">
                 <button
                   className="btn btn-outline-light dropdown-toggle btn-sm mx-1 nav-btn"
-                  onClick={toggleDropdown}
+                  onClick={() => setShowDropdown((prev) => !prev)}
                   id="navbarDropdown"
                   aria-expanded={showDropdown}
                 >
                   {userEmail}
                 </button>
                 <ul
-                  className={`dropdown-menu ${showDropdown ? 'show' : ''}`}
+                  className={`dropdown-menu ${showDropdown ? "show" : ""}`}
                   aria-labelledby="navbarDropdown"
                 >
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={handleLogout}
-                      >
-                        Logout
-                      </button>
-                    </li>
-                 
+                  <li>
+                    <button className="dropdown-item" onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -117,25 +104,16 @@ const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData, userEmail
 
       {/* Pinned Music Modal */}
       {showPinnedModal && (
-        <div
-          className="modal fade modal-xl"
-          id="exampleModal"
-          tabIndex={1}
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
+        <div className="modal d-block">
+          <div className="modal-dialog modal-xl">
             <div className="modal-content">
               <div className="modal-header">
-                <h1 className="modal-title fs-5" id="exampleModalLabel">
-                  Pinned Music
-                </h1>
+                <h5 className="modal-title">Pinned Music</h5>
                 <button
                   type="button"
                   className="btn-close"
-                  onClick={togglePinnedModal}
-                  aria-label="Close"
-                />
+                  onClick={() => setShowPinnedModal(false)}
+                ></button>
               </div>
               <div className="modal-body">
                 <PinnedMusic />
@@ -147,25 +125,16 @@ const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData, userEmail
 
       {/* Liked Music Modal */}
       {showLikedModal && (
-        <div
-          className="modal fade modal-xl"
-          id="likedMusicModal"
-          tabIndex={1}
-          aria-labelledby="likedMusicModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
+        <div className="modal d-block">
+          <div className="modal-dialog modal-xl">
             <div className="modal-content">
               <div className="modal-header">
-                <h1 className="modal-title fs-5" id="likedMusicModalLabel">
-                  Liked Music
-                </h1>
+                <h5 className="modal-title">Liked Music</h5>
                 <button
                   type="button"
                   className="btn-close"
-                  onClick={toggleLikedModal}
-                  aria-label="Close"
-                />
+                  onClick={() => setShowLikedModal(false)}
+                ></button>
               </div>
               <div className="modal-body">
                 <LikedMusic />
